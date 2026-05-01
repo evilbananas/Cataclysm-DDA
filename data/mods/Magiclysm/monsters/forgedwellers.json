@@ -29,7 +29,7 @@
     "special_attacks": [ { "type": "spell", "spell_data": { "id": "manatouched_seeker_bolts", "min_level": 5 }, "cooldown": 60 } ],
     "anger_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "HURT" ],
     "death_function": { "corpse_type": "BROKEN" },
-    "flags": [ "SEES", "NO_BREATHE", "PATH_AVOID_DANGER", "LOUDMOVES", "PATH_AVOID_FIRE", "PATH_AVOID_FALL" ],
+    "flags": [ "SEES", "NO_BREATHE", "PATH_AVOID_DANGER", "LOUDMOVES", "PATH_AVOID_FIRE", "PATH_AVOID_FALL", "ATTACK_CONFIRM" ],
     "armor": { "bash": 32, "cut": 32, "heat": 30, "bullet": 26 }
   },
   {
@@ -47,6 +47,7 @@
       "subtype": "collection",
       "groups": [ [ "forge_life", 40 ], [ "bedroom", 1 ], [ "dresser", 5 ], [ "ammo_common_loose", 18 ] ]
     },
+    "extend": { "flags": [ "ATTACK_CONFIRM" ] },
     "armor": { "heat": 40 }
   },
   {
@@ -65,6 +66,7 @@
       "subtype": "collection",
       "groups": [ [ "forge_life", 40 ], [ "bedroom", 1 ], [ "dresser", 5 ], [ "ammo_common_loose", 18 ] ]
     },
+    "extend": { "flags": [ "ATTACK_CONFIRM" ] },
     "armor": { "bash": 2, "cut": 12, "stab": 6, "bullet": 10, "heat": 40 }
   },
   {
@@ -81,6 +83,7 @@
       "subtype": "collection",
       "groups": [ [ "forge_life", 40 ], [ "bedroom", 1 ], [ "dresser", 5 ], [ "ammo_common_loose", 18 ] ]
     },
+    "extend": { "flags": [ "ATTACK_CONFIRM" ] },
     "armor": { "electric": 1, "heat": 40 }
   },
   {
@@ -189,7 +192,17 @@
       "subtype": "collection",
       "groups": [ [ "forge_life", 40 ], [ "bedroom", 1 ], [ "dresser", 5 ], [ "ammo_common_loose", 18 ] ]
     },
-    "flags": [ "SEES", "HEARS", "WARM", "BASHES", "HUMAN", "PATH_AVOID_DANGER", "PATH_AVOID_FIRE", "PATH_AVOID_FALL" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "WARM",
+      "BASHES",
+      "HUMAN",
+      "PATH_AVOID_DANGER",
+      "PATH_AVOID_FIRE",
+      "PATH_AVOID_FALL",
+      "ATTACK_CONFIRM"
+    ],
     "armor": { "bash": 23, "cut": 32, "heat": 35, "bullet": 26 }
   },
   {

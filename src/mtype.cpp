@@ -188,6 +188,7 @@ void set_mon_flag_ids()
     mon_flag_APPEARS_NEUTRAL = mon_flag_id( "APPEARS_NEUTRAL" );
     mon_flag_AQUATIC = mon_flag_id( "AQUATIC" );
     mon_flag_ARTHROPOD_BLOOD = mon_flag_id( "ARTHROPOD_BLOOD" );
+    mon_flag_ATTACK_CONFIRM = mon_flag_id( "ATTACK_CONFIRM" );
     mon_flag_ATTACKMON = mon_flag_id( "ATTACKMON" );
     mon_flag_ATTACK_LOWER = mon_flag_id( "ATTACK_LOWER" );
     mon_flag_ATTACK_UPPER = mon_flag_id( "ATTACK_UPPER" );

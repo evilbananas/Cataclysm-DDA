@@ -723,5 +723,10 @@
     "id": "ONE_DIMENSIONAL_Z",
     "type": "monster_flag",
     "//": "Monsters that exist in the z dimension, for creatures that exist in fewer than 3"
+  },
+  {
+    "id": "ATTACK_CONFIRM",
+    "type": "monster_flag",
+    "//": "This monster requires confirmation to attack regardless of safe mode settings"
   }
 ]

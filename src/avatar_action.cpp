@@ -396,12 +396,18 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
                                           _( "You're too pacified to strike anything…" ) ) ) {
                 return false;
             }
-            if( g->safe_mode == SAFE_MODE_ON && critter.attitude_to( you ) == Creature::Attitude::NEUTRAL ) {
-                const std::string msg_safe_mode = press_x( ACTION_TOGGLE_SAFEMODE );
-                add_msg( m_warning,
-                         _( "Not attacking the %1$s -- safe mode is on!  (%2$s to turn it off)" ), critter.name(),
-                         msg_safe_mode );
-                return false;
+            if( critter.attitude_to( you ) == Creature::Attitude::NEUTRAL ) {
+                if( g->safe_mode == SAFE_MODE_ON ) {
+                    const std::string msg_safe_mode = press_x( ACTION_TOGGLE_SAFEMODE );
+                    add_msg( m_warning,
+                            _( "Not attacking the %1$s -- safe mode is on!  (%2$s to turn it off)" ), critter.name(),
+                            msg_safe_mode );
+                    return false;
+                } else if( critter.has_flag( mon_flag_ATTACK_CONFIRM ) ) {
+                    if( !query_yn( _( "This really feels like a bad idea. Proceed to attack?" ) ) ) {
+                        return false;
+                    }
+                }
             }
             you.melee_attack( critter, true );
             if( critter.is_hallucination() ) {
