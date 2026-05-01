@@ -1,0 +1,16 @@
+[
+  {
+    "type": "MOD_INFO",
+    "id": "no_hope_no_revive",
+    "name": "No Hope: No Revive",
+    "authors": [  ],
+    "description": "Zombies do not revive similiar to the original No Hope mod.",
+    "category": "rebalance",
+    "dependencies": [ "dda", "no_hope" ]
+  },
+  {
+    "type": "monster_adjustment",
+    "species": "ZOMBIE",
+    "flag": { "name": "REVIVES", "value": false }
+  }
+]
