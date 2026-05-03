@@ -343,7 +343,7 @@ std::string enum_to_string<inventory_selector::uimode>( inventory_selector::uimo
 static inventory_selector_save_state inventory_sel_default_state{ inventory_selector::uimode::categories };
 inventory_selector_save_state inventory_ui_default_state{ inventory_selector::uimode::categories };
 inventory_selector_save_state pickup_sel_default_state{ inventory_selector::uimode::categories };
-inventory_selector_save_state pickup_ui_default_state{ inventory_selector::uimode::hierarchy };
+inventory_selector_save_state pickup_ui_default_state{ inventory_selector::uimode::categories };
 
 void save_inv_state( JsonOut &json )
 {

@@ -34,7 +34,7 @@ class tab_data
         input_context ctxt;
         std::string title;
 
-        surroundings_menu_sort_flags sort_flags = surroundings_menu_sort_flags::DEFAULT;
+        surroundings_menu_sort_flags sort_flags = surroundings_menu_sort_flags::CATEGORY_NAME;
         // each group will start at a new line
         // currently roughly grouped by actions on an entry and actions on the list as a whole
         std::vector<std::unordered_set<std::string>> hotkey_groups;

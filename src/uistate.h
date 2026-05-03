@@ -22,7 +22,7 @@ class item;
 
 struct advanced_inv_pane_save_state {
     public:
-        int sort_idx = 1;
+        int sort_idx = 6;
         std::string filter;
         int area_idx = 11;
         int selected_idx = 0;
