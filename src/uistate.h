@@ -240,7 +240,7 @@ class uistatedata
         // so we store them as ints instead
         // todo: turn into surroundings_menu_sort_flags
         // when flag enums can be serialized as numbers
-        int vmenu_item_sort = 0;
+        int vmenu_item_sort = 3; // CATEGORY_NAME (NAME=1 | CATEGORY=2)
         int vmenu_monster_sort = 0;
         int vmenu_terfurn_sort = 0;
         std::set<itype_id> read_items;
