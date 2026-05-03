@@ -21,10 +21,10 @@
 $ErrorActionPreference = "Stop"
 
 function Invoke-Git {
-    param([string[]]$Args)
-    & git @Args
+    param([string[]]$GitArgs)
+    & git @GitArgs
     if ($LASTEXITCODE -ne 0) {
-        Write-Error "git $($Args -join ' ') failed (exit $LASTEXITCODE)."
+        Write-Error "git $($GitArgs -join ' ') failed (exit $LASTEXITCODE)."
         exit $LASTEXITCODE
     }
 }
@@ -36,6 +36,10 @@ Invoke-Git "fetch", "upstream"
 
 Write-Host "`n=== Stashing local changes ===" -ForegroundColor Cyan
 $StashOutput = git stash 2>&1
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "git stash failed (exit $LASTEXITCODE)."
+    exit $LASTEXITCODE
+}
 $Stashed = $StashOutput -notcontains "No local changes to save"
 Write-Host $StashOutput
 

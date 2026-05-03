@@ -9,7 +9,6 @@
 
 .NOTES
     Userdata location: $env:USERPROFILE\cdda\userdata
-    To migrate existing saves from a previous location, run migrate_userdata.ps1 first.
 #>
 $ErrorActionPreference = "Stop"
 
