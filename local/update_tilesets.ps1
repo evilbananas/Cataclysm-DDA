@@ -37,17 +37,6 @@ $SkipTilesets = @(
     "Larwick_Overmap"
 )
 
-function Get-LatestRelease {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$Repository
-    )
-
-    Write-Host "Fetching latest release metadata from $Repository via GitHub CLI"
-    $releaseJson = gh release view --repo $Repository --json tagName
-    return $releaseJson | ConvertFrom-Json
-}
-
 function Get-InstalledVersion {
     param([string]$Repository)
 
@@ -70,8 +59,8 @@ function Set-InstalledVersion {
 function Get-PendingUpdate {
     param([string]$Repository)
 
-    $release = Get-LatestRelease -Repository $Repository
-    $tagName = $release.tagName
+    Write-Host "Fetching latest release metadata from $Repository via GitHub CLI"
+    $tagName = (gh release list --repo $Repository --limit 1 --json tagName | ConvertFrom-Json)[0].tagName
     Write-Host "Latest release: $tagName"
 
     $installedVersion = Get-InstalledVersion -Repository $Repository

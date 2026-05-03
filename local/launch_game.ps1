@@ -18,7 +18,7 @@ $Exe      = Join-Path $Root "cataclysm-tiles.exe"
 $UserData = Join-Path $env:USERPROFILE "cdda\userdata"
 
 if (-not (Test-Path $Exe)) {
-    Write-Error "Executable not found: $Exe`nRun build_and_distribute.ps1 first."
+    Write-Error "Executable not found: $Exe`nRun the 'MSBuild: Quick|x64' task first."
     exit 1
 }
 
@@ -35,5 +35,4 @@ if (Test-Path $CacheDir) {
 }
 
 Write-Host "Launching CDDA with --userdir $UserData" -ForegroundColor Cyan
-Set-Location $Root
-& $Exe --userdir $UserData
+Start-Process -FilePath $Exe -ArgumentList "--userdir", $UserData -WorkingDirectory $Root

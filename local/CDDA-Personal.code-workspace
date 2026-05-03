@@ -64,21 +64,17 @@
             {
                 "label": "Sync Fork from Upstream",
                 "type": "shell",
-                "command": "git fetch upstream && git stash && git checkout master && git merge upstream/master && git push origin master && git checkout - && git stash pop",
+                "command": "pwsh",
+                "args": ["-File", "${workspaceFolder}\\local\\sync_fork.ps1"],
                 "group": "build"
             },
             {
-                "label": "Merge master into Personal-Changes",
-                "type": "shell",
-                "command": "git merge master"
-            },
-            {
                 "label": "Sync, Build & Update: Quick|x64",
-                "dependsOn": ["Sync Fork from Upstream", "Merge master into Personal-Changes", "MSBuild: Quick|x64", "Update Tilesets", "Update Soundpacks"],
+                "dependsOn": ["Sync Fork from Upstream", "MSBuild: Quick|x64", "Update Tilesets", "Update Soundpacks"],
                 "dependsOrder": "sequence",
                 "group": "build",
                 "problemMatcher": "$msCompile"
-            },
+            }
         ]
     }
 }
