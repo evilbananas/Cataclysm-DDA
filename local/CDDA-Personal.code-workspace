@@ -1,0 +1,74 @@
+{
+    "folders": [
+        {
+            "path": ".."
+        }
+    ],
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "MSBuild: Quick|x64",
+                "type": "shell",
+                "command": "${workspaceFolder}\\.vscode\\msbuild.ps1",
+                "args": ["-SolutionPath", "${workspaceFolder}\\msvc-full-features\\Cataclysm-vcpkg-static.sln", "-Configuration", "Quick"],
+                "group": "build",
+                "problemMatcher": "$msCompile"
+            },
+            {
+                "label": "MSBuild: Release|x64",
+                "type": "shell",
+                "command": "${workspaceFolder}\\.vscode\\msbuild.ps1",
+                "args": ["-SolutionPath", "${workspaceFolder}\\msvc-full-features\\Cataclysm-vcpkg-static.sln", "-Configuration", "Release"],
+                "group": "build",
+                "problemMatcher": "$msCompile"
+            },
+            {
+                "label": "MSBuild: Debug|x64",
+                "type": "shell",
+                "command": "${workspaceFolder}\\.vscode\\msbuild.ps1",
+                "args": ["-SolutionPath", "${workspaceFolder}\\msvc-full-features\\Cataclysm-vcpkg-static.sln", "-Configuration", "Debug"],
+                "group": "build",
+                "problemMatcher": "$msCompile"
+            },
+            {
+                "label": "Distribute",
+                "type": "shell",
+                "command": "(echo A & echo A & echo A & echo A & echo A & echo A & echo A & echo A & echo A & echo A) | distribute.bat",
+                "options": {
+                    "cwd": "${workspaceFolder}\\msvc-full-features",
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [
+                            "/d",
+                            "/c"
+                        ]
+                    }
+                },
+                "group": "build"
+            },
+            {
+                "label": "Download Latest Tilesets",
+                "type": "shell",
+                "command": "pwsh",
+                "args": ["-File", "${workspaceFolder}\\local\\download_latest_tilesets.ps1"],
+                "group": "build"
+            },
+            {
+                "label": "Download Latest Soundpacks",
+                "type": "shell",
+                "command": "pwsh",
+                "args": ["-File", "${workspaceFolder}\\local\\download_latest_soundpacks.ps1"],
+                "group": "build"
+            },
+            {
+                "label": "Build and Distribute",
+                "type": "shell",
+                "command": "pwsh",
+                "args": ["-File", "${workspaceFolder}\\local\\build_and_distribute.ps1"],
+                "group": "build",
+                "problemMatcher": "$msCompile"
+            }
+        ]
+    }
+}
