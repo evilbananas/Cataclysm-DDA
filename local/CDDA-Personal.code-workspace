@@ -12,7 +12,6 @@
                 "type": "shell",
                 "command": "${workspaceFolder}\\.vscode\\msbuild.ps1",
                 "args": ["-SolutionPath", "${workspaceFolder}\\msvc-full-features\\Cataclysm-vcpkg-static.sln", "-Configuration", "Quick"],
-                "group": "build",
                 "problemMatcher": "$msCompile"
             },
             {
@@ -20,7 +19,6 @@
                 "type": "shell",
                 "command": "${workspaceFolder}\\.vscode\\msbuild.ps1",
                 "args": ["-SolutionPath", "${workspaceFolder}\\msvc-full-features\\Cataclysm-vcpkg-static.sln", "-Configuration", "Release"],
-                "group": "build",
                 "problemMatcher": "$msCompile"
             },
             {
@@ -28,47 +26,59 @@
                 "type": "shell",
                 "command": "${workspaceFolder}\\.vscode\\msbuild.ps1",
                 "args": ["-SolutionPath", "${workspaceFolder}\\msvc-full-features\\Cataclysm-vcpkg-static.sln", "-Configuration", "Debug"],
+                "problemMatcher": "$msCompile"
+            },
+            {
+                "label": "Build & Update: Quick|x64",
+                "dependsOn": ["MSBuild: Quick|x64", "Update Tilesets", "Update Soundpacks"],
+                "dependsOrder": "sequence",
                 "group": "build",
                 "problemMatcher": "$msCompile"
             },
             {
-                "label": "Distribute",
-                "type": "shell",
-                "command": "(echo A & echo A & echo A & echo A & echo A & echo A & echo A & echo A & echo A & echo A) | distribute.bat",
-                "options": {
-                    "cwd": "${workspaceFolder}\\msvc-full-features",
-                    "shell": {
-                        "executable": "cmd.exe",
-                        "args": [
-                            "/d",
-                            "/c"
-                        ]
-                    }
-                },
-                "group": "build"
-            },
-            {
-                "label": "Download Latest Tilesets",
-                "type": "shell",
-                "command": "pwsh",
-                "args": ["-File", "${workspaceFolder}\\local\\download_latest_tilesets.ps1"],
-                "group": "build"
-            },
-            {
-                "label": "Download Latest Soundpacks",
-                "type": "shell",
-                "command": "pwsh",
-                "args": ["-File", "${workspaceFolder}\\local\\download_latest_soundpacks.ps1"],
-                "group": "build"
-            },
-            {
-                "label": "Build and Distribute",
-                "type": "shell",
-                "command": "pwsh",
-                "args": ["-File", "${workspaceFolder}\\local\\build_and_distribute.ps1"],
+                "label": "Build & Update: Release|x64",
+                "dependsOn": ["MSBuild: Release|x64", "Update Tilesets", "Update Soundpacks"],
+                "dependsOrder": "sequence",
                 "group": "build",
                 "problemMatcher": "$msCompile"
-            }
+            },
+            {
+                "label": "Build & Update: Debug|x64",
+                "dependsOn": ["MSBuild: Debug|x64", "Update Tilesets", "Update Soundpacks"],
+                "dependsOrder": "sequence",
+                "group": "build",
+                "problemMatcher": "$msCompile"
+            },
+            {
+                "label": "Update Tilesets",
+                "type": "shell",
+                "command": "pwsh",
+                "args": ["-File", "${workspaceFolder}\\local\\update_tilesets.ps1"]
+            },
+            {
+                "label": "Update Soundpacks",
+                "type": "shell",
+                "command": "pwsh",
+                "args": ["-File", "${workspaceFolder}\\local\\update_soundpacks.ps1"]
+            },
+            {
+                "label": "Sync Fork from Upstream",
+                "type": "shell",
+                "command": "git fetch upstream && git stash && git checkout master && git merge upstream/master && git push origin master && git checkout - && git stash pop",
+                "group": "build"
+            },
+            {
+                "label": "Merge master into Personal-Changes",
+                "type": "shell",
+                "command": "git merge master"
+            },
+            {
+                "label": "Sync, Build & Update: Quick|x64",
+                "dependsOn": ["Sync Fork from Upstream", "Merge master into Personal-Changes", "MSBuild: Quick|x64", "Update Tilesets", "Update Soundpacks"],
+                "dependsOrder": "sequence",
+                "group": "build",
+                "problemMatcher": "$msCompile"
+            },
         ]
     }
 }

@@ -29,10 +29,17 @@
     Version files are stored as hidden dotfiles in $Destination, named after
     the repo slug (e.g. .Fris0uman_CDDA-Soundpacks.version). The $Destination
     directory is created automatically if it does not exist.
+    Soundpacks are installed to the userdata sound directory so they survive rebuilds.
 #>
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    $argList = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $MyInvocation.MyCommand.Path) + $MyInvocation.BoundParameters.GetEnumerator().ForEach({ "-$($_.Key)", $_.Value })
+    & pwsh.exe @argList
+    exit $LASTEXITCODE
+}
+
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-$Destination = Join-Path $PSScriptRoot "..\sound"
+$Destination = Join-Path $env:USERPROFILE "cdda\userdata\sound"
 $TempDir = Join-Path ([System.IO.Path]::GetTempPath()) "cdda_soundpacks"
 $Repos = @(
     "Fris0uman/CDDA-Soundpacks"

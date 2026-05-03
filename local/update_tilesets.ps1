@@ -17,10 +17,18 @@
 .NOTES
     Version files are stored as hidden dotfiles in $Destination, named after
     the repo slug (e.g. .I-am-Erk_CDDA-Tilesets.version).
+    Tilesets are installed to the userdata gfx directory so they survive rebuilds.
 #>
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    $argList = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $MyInvocation.MyCommand.Path) + $MyInvocation.BoundParameters.GetEnumerator().ForEach({ "-$($_.Key)", $_.Value })
+    & pwsh.exe @argList
+    exit $LASTEXITCODE
+}
+
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-$Destination = [string](Resolve-Path (Join-Path $PSScriptRoot "..\gfx"))
+$Destination = Join-Path $env:USERPROFILE "cdda\userdata\gfx"
+New-Item -ItemType Directory -Path $Destination -Force | Out-Null
 $TempDir = Join-Path ([System.IO.Path]::GetTempPath()) "cdda_tilesets"
 $Repos = @(
     "I-am-Erk/CDDA-Tilesets"
