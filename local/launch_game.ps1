@@ -12,9 +12,13 @@
 #>
 $ErrorActionPreference = "Stop"
 
-$Root     = Resolve-Path (Join-Path $PSScriptRoot "..")
-$Exe      = Join-Path $Root "cataclysm-tiles.exe"
-$UserData = Join-Path $env:USERPROFILE "cdda\userdata"
+$Root       = Resolve-Path (Join-Path $PSScriptRoot "..")
+$Exe        = Join-Path $Root "cataclysm-tiles.exe"
+$UserData   = Join-Path $env:USERPROFILE "cdda\userdata"
+$CacheDirs  = @(
+    Join-Path $Root "data\cache"
+    Join-Path $UserData "cache"
+)
 
 if (-not (Test-Path $Exe)) {
     Write-Error "Executable not found: $Exe`nRun the 'MSBuild: Quick|x64' task first."
@@ -26,11 +30,12 @@ if (-not (Test-Path $UserData)) {
     New-Item -ItemType Directory -Path $UserData -Force | Out-Null
 }
 
-# Remove stale cache - the game regenerates it on first run
-$CacheDir = Join-Path $Root "data\cache"
-if (Test-Path $CacheDir) {
-    Write-Host "Clearing stale data cache..."
-    Remove-Item $CacheDir -Recurse -Force
+# Remove stale caches - the game regenerates them on first run
+foreach ($CacheDir in $CacheDirs) {
+    if (Test-Path $CacheDir) {
+        Write-Host "Clearing stale data cache: $CacheDir"
+        Remove-Item $CacheDir -Recurse -Force
+    }
 }
 
 Write-Host "Launching CDDA with --userdir $UserData" -ForegroundColor Cyan
