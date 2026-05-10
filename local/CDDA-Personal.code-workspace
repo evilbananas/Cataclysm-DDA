@@ -72,7 +72,7 @@
                 "label": "Sync, Build & Update: Quick|x64",
                 "dependsOn": ["Sync Fork from Upstream", "MSBuild: Quick|x64", "Update Tilesets", "Update Soundpacks"],
                 "dependsOrder": "sequence",
-                "group": "build",
+                "group": { "kind": "build", "isDefault": true },
                 "problemMatcher": "$msCompile"
             }
         ]
